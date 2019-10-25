@@ -1,4 +1,5 @@
 # vim: set ts=2 sw=2 et:
+Exec { path => '/bin/:/sbin/:/usr/bin/:/usr/sbin/' }
 
 node server0 {
   # execute 'apt-get update'
