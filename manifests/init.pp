@@ -31,11 +31,12 @@ node server0 {
   }
   
   # unzip dokuwiki
-#  exec { 'unzip':
-#    command => 'cd /usr/src && tar xavf dokuwiki.tgz && mv dokuwiki-2018-04-22b dokuwiki',
-#    user => 'root',
-#    require => Exec['download_dokuwiki'],
-#  }
+  exec { 'unzip':
+    command => 'cd /usr/src && tar xavf dokuwiki.tgz && mv dokuwiki-2018-04-22b dokuwiki',
+    user => 'root',
+    provider => shell,
+    require => Exec['download_dokuwiki'],
+  }
 }
 #class apache{
 #  package { 'apache2':
