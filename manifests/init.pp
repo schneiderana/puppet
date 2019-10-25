@@ -40,7 +40,7 @@ node server0 {
   }
   
   # Create directory for virtualhost data
-  $wiki.each |String $wiki| {
+  $wiki.each {
     file { '/var/www/${wiki}':
       ensure => directory,
     }  
