@@ -27,15 +27,15 @@ node server0 {
   # download and install dokuwiki
   exec { 'download_dokuwiki':
     command => '/usr/bin/wget -O /usr/src/dokuwiki.tgz https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz',
-    onlyif => '/usr/bin/test -f /usr/src/dokuwiki.tgz'
+    creates => '/usr/src/dokuwiki.tgz'
   }
   
   # unzip dokuwiki
   exec { 'unzip':
     command => 'cd /usr/src && tar xavf dokuwiki.tgz && mv dokuwiki-2018-04-22b dokuwiki',
-    user => 'root',
     provider => shell,
-    require => Exec['download_dokuwiki'],
+    require => File['/usr/src/dokuwiki.tgz'],
+    creates => '/usr/src/dokuwiki'
   }
 }
 #class apache{
