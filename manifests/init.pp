@@ -25,9 +25,8 @@ node server0 {
   
   # download and install dokuwiki
   exec { 'download_dokuwiki':
-    command => 'wget -O /usr/src/dokuwiki.tgz && https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz',
-    provider => shell,
-    onlyif => 'test -f /usr/src/'
+    command => 'wget -O /usr/src/dokuwiki.tgz https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz',
+    onlyif => 'test -f /usr/src/dokuwiki.tgz'
   }
   
   # unzip dokuwiki
