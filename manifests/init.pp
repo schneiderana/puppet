@@ -1,13 +1,26 @@
-node default{
-	file{'fill motd':
-	path => '/etc/motd',
-	content => 'Hello world',
-	}
-}
+# vim: set ts=2 sw=2 et:
 
 node server0 {
-	package { 'tmux':
-	ensure => installed,
-	name   => 'tmux',
-   }
+# execute 'apt-get update'
+  exec { 'apt-update':                    # exec resource named 'apt-update'
+    command => '/usr/bin/apt-get update'  # command this resource will run
+  }
+
+# install apache2 package
+  package { 'apache2':
+    require => Exec['apt-update'],        # require 'apt-update' before installing
+    ensure => installed,
+  }
+
+# ensure apache2 service is running
+  service { 'apache2':
+    ensure => running,
+  }
 }
+#class apache{
+#  package { 'apache2':
+#    ensure  => installed,
+#    name    => $apache,
+#    require => Package['apache2'],
+#  }
+#}
