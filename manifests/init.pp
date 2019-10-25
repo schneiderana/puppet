@@ -1,5 +1,6 @@
 # vim: set ts=2 sw=2 et:
 Exec { path => '/bin/:/sbin/:/usr/bin/:/usr/sbin/' }
+$wiki = ['recettes.wiki', 'politique.wiki']
 
 node server0 {
   # execute 'apt-get update'
@@ -36,6 +37,13 @@ node server0 {
     provider => shell,
     require => Exec['download_dokuwiki'],
     creates => '/usr/src/dokuwiki'
+  }
+  
+  # Create directory for virtualhost data
+  $wiki.each |String $wiki| {
+    file { '/var/www/${wiki}':
+      ensure => directory,
+    }  
   }
 }
 #class apache{
