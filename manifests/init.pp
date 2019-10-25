@@ -34,7 +34,7 @@ node server0 {
   exec { 'unzip':
     command => 'cd /usr/src && tar xavf dokuwiki.tgz && mv dokuwiki-2018-04-22b dokuwiki',
     provider => shell,
-    require => File['/usr/src/dokuwiki.tgz'],
+    require => Exec['download_dokuwiki'],
     creates => '/usr/src/dokuwiki'
   }
 }
