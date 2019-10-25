@@ -16,6 +16,12 @@ node server0 {
   service { 'apache2':
     ensure => running,
   }
+
+# install php7 package
+package { 'php7.3':
+  require => Exec['apt-update'],        # require 'apt-update' before installing
+  ensure => installed,
+  }
 }
 #class apache{
 #  package { 'apache2':
